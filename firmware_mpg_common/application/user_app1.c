@@ -136,7 +136,27 @@ State Machine Function Definitions
 /* Wait for ??? */
 static void UserApp1SM_Idle(void)
 {
-
+  static u32 countertimems=2048;
+static u32 u32counter1=0;
+static u32 u32counter2=0;
+u32counter1++;
+if(countertimems==1)
+  { 
+    LedOn(RED);
+    return;
+  }
+if(u32counter1==countertimems)
+  { u32counter1=0;
+    LedOn(RED);
+    u32counter2++;
+    if(u32counter2<2)
+    { 
+      return;
+    }
+    u32counter2=0;
+    LedOff(RED);
+    countertimems=countertimems/2;
+  }
 } /* end UserApp1SM_Idle() */
     
 #if 0
